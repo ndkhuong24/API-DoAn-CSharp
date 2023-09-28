@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\API-DoAn-CSharp.props" />
+</Project>
