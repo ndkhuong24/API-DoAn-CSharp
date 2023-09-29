@@ -1,4 +1,5 @@
 using API.Data;
+using API.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,9 @@ builder.Services.AddDbContext<StyleDbcontext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer-Connection"));
 });
+
+// Life cycle DI: AddSingleton(), AddTransient(), AddScoped()
+builder.Services.AddScoped<IStyleRepository, StyleRepository>();
 
 var app = builder.Build();
 

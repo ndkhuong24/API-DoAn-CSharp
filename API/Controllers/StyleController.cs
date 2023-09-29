@@ -1,6 +1,5 @@
-﻿using API.Data;
+﻿using API.Repository;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -8,18 +7,31 @@ namespace API.Controllers
     [ApiController]
     public class StyleController : ControllerBase
     {
-        private readonly StyleDbcontext _dbContext;
+        private readonly IStyleRepository _styleRepository;
 
-        public StyleController(StyleDbcontext styleDbcontext)
+        public StyleController(IStyleRepository styleRepository)
         {
-            _dbContext = styleDbcontext;
+            _styleRepository = styleRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllStyle()
         {
-            var listStyle = await _dbContext.Style.FromSqlRaw("EXEC Style_Get").ToListAsync();
-            return Ok(listStyle);
+            try
+            {
+                return Ok(await _styleRepository.GetAllStylesAsync());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetStyle(int id)
+        {
+            var style = await _styleRepository.GetStylesAsync(id);
+            return Ok(style);
         }
     }
 }
