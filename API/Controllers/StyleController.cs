@@ -33,5 +33,6 @@ namespace API.Controllers
             var style = await _styleRepository.GetStylesAsync(id);
             return Ok(style);
         }
+
     }
 }

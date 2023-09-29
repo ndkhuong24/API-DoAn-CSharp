@@ -1,5 +1,6 @@
 ﻿using API.Data;
 using Microsoft.EntityFrameworkCore;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace API.Repository
 {
@@ -7,9 +8,10 @@ namespace API.Repository
     {
         private readonly StyleDbcontext _dbcontext;
 
-        public StyleRepository(StyleDbcontext styleDbcontext) {
+        public StyleRepository(StyleDbcontext styleDbcontext)
+        {
             _dbcontext = styleDbcontext;
-        } 
+        }
         public async Task<int> AddStyleAsync(Style style)
         {
             var newStyle = style;
@@ -30,20 +32,20 @@ namespace API.Repository
 
         public async Task<List<Style>> GetAllStylesAsync()
         {
-            var styles = await _dbcontext.Style!.ToListAsync();
+            var styles = await _dbcontext.Style!.FromSqlRaw("EXEC Style_Get").ToListAsync();
             return styles;
 
         }
 
         public async Task<Style> GetStylesAsync(int id)
         {
-            var style = await _dbcontext.Style!.FindAsync(id);
+            var style = (await _dbcontext.Style!.FromSqlRaw("EXECUTE Style_Get {0}",id).ToListAsync()).FirstOrDefault();
             return style;
         }
 
         public async Task UpdateStyleAsync(int id, Style style)
         {
-            if(id==style.id)
+            if (id == style.id)
             {
                 var updateStyle = style;
                 _dbcontext.Style!.Update(updateStyle);
