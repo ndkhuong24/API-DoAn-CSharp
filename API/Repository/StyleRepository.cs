@@ -1,7 +1,6 @@
 ﻿using API.Data;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
-
 namespace API.Repository
 {
     public class StyleRepository : IStyleRepository
@@ -12,11 +11,34 @@ namespace API.Repository
         {
             _dbcontext = styleDbcontext;
         }
+        //public async Task<Style> AddStyleAsync(Style style)
+        //{
+
+        //    var styles = (await _dbcontext.Style!.FromSqlRaw("EXECUTE PostStyle @Id=0, @Name={0},@Status={1}", style.id, style.name, style.status).ToListAsync()).FirstOrDefault();
+        //    var a = styles;
+        //    return a;
+        //}
+
         public async Task<Style> AddStyleAsync(Style style)
         {
-            var styles = (await _dbcontext.Style!.FromSqlRaw("EXECUTE PostStyle @Name={0},@Status={1}", style.name, style.status).ToListAsync()).FirstOrDefault();
-            return styles;
+            try
+            {
+                var nameParam = new SqlParameter("@Name", style.name);
+                var statusParam = new SqlParameter("@Status", style.status);
+
+                await _dbcontext.Database.ExecuteSqlRawAsync("EXEC PostStyle @Name, @Status", nameParam, statusParam);
+
+                return style;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
+
+
+
 
         public async Task DeleteStyleAsync(int id)
         {
