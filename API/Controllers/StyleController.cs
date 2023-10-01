@@ -1,4 +1,5 @@
-﻿using API.Repository;
+﻿using API.Data;
+using API.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -33,6 +34,11 @@ namespace API.Controllers
             var style = await _styleRepository.GetStylesAsync(id);
             return Ok(style);
         }
-
+        [HttpPost]
+        public async Task<IActionResult> PostStyle(Style style)
+        {
+            var styles = await _styleRepository.AddStyleAsync(style);
+            return Ok(styles);
+        }
     }
 }

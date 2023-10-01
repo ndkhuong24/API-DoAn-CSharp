@@ -1,6 +1,6 @@
 ﻿using API.Data;
 using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
+using System.Security.Cryptography.X509Certificates;
 
 namespace API.Repository
 {
@@ -12,12 +12,10 @@ namespace API.Repository
         {
             _dbcontext = styleDbcontext;
         }
-        public async Task<int> AddStyleAsync(Style style)
+        public async Task<Style> AddStyleAsync(Style style)
         {
-            var newStyle = style;
-            _dbcontext.Style!.Add(newStyle);
-            await _dbcontext.SaveChangesAsync();
-            return newStyle.id;
+            var styles = (await _dbcontext.Style!.FromSqlRaw("EXECUTE PostStyle @Name={0},@Status={1}", style.name, style.status).ToListAsync()).FirstOrDefault();
+            return styles;
         }
 
         public async Task DeleteStyleAsync(int id)
@@ -39,7 +37,7 @@ namespace API.Repository
 
         public async Task<Style> GetStylesAsync(int id)
         {
-            var style = (await _dbcontext.Style!.FromSqlRaw("EXECUTE Style_Get {0}",id).ToListAsync()).FirstOrDefault();
+            var style = (await _dbcontext.Style!.FromSqlRaw("EXECUTE Style_Get {0}", id).ToListAsync()).FirstOrDefault();
             return style;
         }
 
