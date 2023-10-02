@@ -14,7 +14,6 @@ namespace API.Controllers
         {
             _styleRepository = styleRepository;
         }
-
         [HttpGet]
         public async Task<IActionResult> GetAllStyle()
         {
@@ -27,7 +26,6 @@ namespace API.Controllers
                 return BadRequest();
             }
         }
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStyle(int id)
         {
@@ -39,6 +37,18 @@ namespace API.Controllers
         {
             var styles = await _styleRepository.AddStyleAsync(style);
             return Ok(styles);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteStyle(int id)
+        {
+            await _styleRepository.DeleteStyleAsync(id);
+            return Ok();
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateStyle(int id, Style style)
+        {
+            await _styleRepository.UpdateStyleAsync(id, style);
+            return Ok();
         }
     }
 }

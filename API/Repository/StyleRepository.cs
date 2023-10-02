@@ -18,7 +18,6 @@ namespace API.Repository
         //    var a = styles;
         //    return a;
         //}
-
         public async Task<Style> AddStyleAsync(Style style)
         {
             try
@@ -35,42 +34,43 @@ namespace API.Repository
                 throw ex;
             }
         }
-
-
-
-
-
         public async Task DeleteStyleAsync(int id)
         {
-            var deleteStyle = _dbcontext.Style!.SingleOrDefault(b => b.id == id);
-            if (deleteStyle != null)
+            try
             {
-                _dbcontext.Style!.Remove(deleteStyle);
-                await _dbcontext.SaveChangesAsync();
+                var nameParam = new SqlParameter("@Id", id);
+                await _dbcontext.Database.ExecuteSqlRawAsync("EXEC DeleteStyle {0}", id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
-
         public async Task<List<Style>> GetAllStylesAsync()
         {
             var styles = await _dbcontext.Style!.FromSqlRaw("EXEC Style_Get").ToListAsync();
             return styles;
 
         }
-
         public async Task<Style> GetStylesAsync(int id)
         {
             var style = (await _dbcontext.Style!.FromSqlRaw("EXECUTE Style_Get {0}", id).ToListAsync()).FirstOrDefault();
             return style;
         }
-
         public async Task UpdateStyleAsync(int id, Style style)
         {
-            if (id == style.id)
+            try
             {
-                var updateStyle = style;
-                _dbcontext.Style!.Update(updateStyle);
-                await _dbcontext.SaveChangesAsync();
+                var ids = new SqlParameter("@Id", id);
+                var name = new SqlParameter("@NewName", style.name);
+                var status = new SqlParameter("@NewStatus", style.status);
+                await _dbcontext.Database.ExecuteSqlRawAsync("EXEC UpdateStyle @Id,@NewName,@NewStatus", ids, name, status);
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }
