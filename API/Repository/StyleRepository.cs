@@ -70,7 +70,6 @@ namespace API.Repository
             {
                 throw ex;
             }
-
         }
     }
 }
