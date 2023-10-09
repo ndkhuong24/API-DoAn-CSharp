@@ -1,6 +1,8 @@
 ﻿using API.Data;
 using API.Repository;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Sockets;
+using System.Net;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -51,7 +53,30 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseCors(MyAllowSpecificOrigins);
 
+//Setup local IP\
+string localIP = LocalIPAddress();
+
+app.Urls.Add("https://" + localIP + ":8080");
+
 app.Run();
+
+
+static string LocalIPAddress()
+{
+    using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
+    {
+        socket.Connect("8.8.8.8", 65530);
+        IPEndPoint? endPoint = socket.LocalEndPoint as IPEndPoint;
+        if (endPoint != null)
+        {
+            return endPoint.Address.ToString();
+        }
+        else
+        {
+            return "127.0.0.1";
+        }
+    }
+}
 
 
 
