@@ -56,7 +56,7 @@ app.UseCors(MyAllowSpecificOrigins);
 //Setup local IP\
 string localIP = LocalIPAddress();
 
-app.Urls.Add("https://" + localIP + ":8080");
+app.Urls.Add("https://" + localIP + ":8081");
 
 app.Run();
 
