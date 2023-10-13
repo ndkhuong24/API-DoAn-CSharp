@@ -1,7 +1,6 @@
 ﻿using API.Data;
 using API.Repository;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Sockets;
 using System.Net;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -33,7 +32,6 @@ builder.Services.AddScoped<IStyleRepository, StyleRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddControllers();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -54,29 +52,26 @@ app.UseRouting();
 app.UseCors(MyAllowSpecificOrigins);
 
 //Setup local IP\
-string localIP = LocalIPAddress();
+//string localIP = LocalIPAddress();
 
-app.Urls.Add("https://" + localIP + ":8081");
+//app.Urls.Add("http://" + localIP + ":5072");
+//app.Urls.Add("https://" + localIP + ":7072");
 
 app.Run();
 
-
-static string LocalIPAddress()
-{
-    using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
-    {
-        socket.Connect("8.8.8.8", 65530);
-        IPEndPoint? endPoint = socket.LocalEndPoint as IPEndPoint;
-        if (endPoint != null)
-        {
-            return endPoint.Address.ToString();
-        }
-        else
-        {
-            return "127.0.0.1";
-        }
-    }
-}
-
-
-
+//static string LocalIPAddress()
+//{
+//    using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
+//    {
+//        socket.Connect("8.8.8.8", 65530);
+//        IPEndPoint? endPoint = socket.LocalEndPoint as IPEndPoint;
+//        if (endPoint != null)
+//        {
+//            return endPoint.Address.ToString();
+//        }
+//        else
+//        {
+//            return "127.0.0.1";
+//        }
+//    }
+//}
