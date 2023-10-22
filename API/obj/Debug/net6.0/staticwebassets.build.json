@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "bUm1vPqwZHJejLhtNIB7WgmMI8ngxypkYrDApg4MvgQ=",
+  "Hash": "3Yz9PDMs6cbR1GeqBzAilGZsdJv6XGuqs5+HU3onZKg=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "API\\wwwroot",
+      "Source": "API",
+      "ContentRoot": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\",
+      "BasePath": "_content/API",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

@@ -172,3 +172,4 @@ C:\Users\kn134\OneDrive\Máy tính\API-DoAn-CSharp\API\obj\Debug\net6.0\refint\A
 C:\Users\kn134\OneDrive\Máy tính\API-DoAn-CSharp\API\obj\Debug\net6.0\API.pdb
 C:\Users\kn134\OneDrive\Máy tính\API-DoAn-CSharp\API\obj\Debug\net6.0\API.genruntimeconfig.cache
 C:\Users\kn134\OneDrive\Máy tính\API-DoAn-CSharp\API\obj\Debug\net6.0\ref\API.dll
+C:\Users\kn134\OneDrive\Máy tính\API-DoAn-CSharp\API\bin\Debug\net6.0\API.staticwebassets.runtime.json
