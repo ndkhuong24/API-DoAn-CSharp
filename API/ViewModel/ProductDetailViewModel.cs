@@ -1,6 +1,6 @@
 ﻿namespace API.ViewModel
 {
-    public class ProductAndImagesDto
+    public class ProductDetailViewModel
     {
         public int CategoryID { get; set; }
         public int BrandID { get; set; }
@@ -11,6 +11,7 @@
         public int MaterialID { get; set; }
         public int Quantity { get; set; }
         public int Price { get; set; }
-        public List<ImageDto> Images { get; set; }
+        public AnhChinhViewModel AnhChinh { get; set; }
+        public List<AnhPhuViewModel> AnhPhu { get; set; }
     }
 }
