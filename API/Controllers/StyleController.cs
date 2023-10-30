@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Style")]
     [ApiController]
     public class StyleController : ControllerBase
     {
@@ -13,6 +13,19 @@ namespace API.Controllers
         public StyleController(IStyleRepository styleRepository)
         {
             _styleRepository = styleRepository;
+        }
+
+        [HttpGet("active")]
+        public async Task<IActionResult> GetAllStyleActice()
+        {
+            try
+            {
+                return Ok(await _styleRepository.GetAllStylesActiveAsync());
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
         [HttpGet]
         public async Task<IActionResult> GetAllStyle()
@@ -26,6 +39,7 @@ namespace API.Controllers
                 return BadRequest();
             }
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStyle(int id)
         {

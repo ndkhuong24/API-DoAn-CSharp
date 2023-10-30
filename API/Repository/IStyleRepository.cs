@@ -5,6 +5,7 @@ namespace API.Repository
     public interface IStyleRepository
     {
         public Task<List<Style>> GetAllStylesAsync();
+        public Task<List<Style>> GetAllStylesActiveAsync();
         public Task<Style> GetStylesAsync(int id);
         public Task<Style> AddStyleAsync(Style style);
         public Task UpdateStyleAsync(Style style);

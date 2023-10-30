@@ -46,6 +46,12 @@ namespace API.Repository
                 throw ex;
             }
         }
+        public async Task<List<Style>> GetAllStylesActiveAsync()
+        {
+            var styles = await _dbcontext.Style!.FromSqlRaw("EXEC Style_Get_Active").ToListAsync();
+            return styles;
+        }
+
         public async Task<List<Style>> GetAllStylesAsync()
         {
             var styles = await _dbcontext.Style!.FromSqlRaw("EXEC Style_Get").ToListAsync();
