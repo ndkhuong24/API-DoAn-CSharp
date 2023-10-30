@@ -57,11 +57,11 @@ namespace API.Repository
             var style = (await _dbcontext.Style!.FromSqlRaw("EXECUTE Style_Get {0}", id).ToListAsync()).FirstOrDefault();
             return style;
         }
-        public async Task UpdateStyleAsync(int id, Style style)
+        public async Task UpdateStyleAsync(Style style)
         {
             try
             {
-                var ids = new SqlParameter("@Id", id);
+                var ids = new SqlParameter("@Id", style.id);
                 var name = new SqlParameter("@NewName", style.name);
                 var status = new SqlParameter("@NewStatus", style.status);
                 await _dbcontext.Database.ExecuteSqlRawAsync("EXEC UpdateStyle @Id,@NewName,@NewStatus", ids, name, status);

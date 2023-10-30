@@ -44,10 +44,10 @@ namespace API.Controllers
             await _styleRepository.DeleteStyleAsync(id);
             return Ok();
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateStyle(int id, Style style)
+        [HttpPut]
+        public async Task<IActionResult> UpdateStyle(Style style)
         {
-            await _styleRepository.UpdateStyleAsync(id, style);
+            await _styleRepository.UpdateStyleAsync(style);
             return Ok();
         }
     }
