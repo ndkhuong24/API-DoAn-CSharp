@@ -6,9 +6,11 @@ namespace API.Repository
     {
         public Task<List<Style>> GetAllStylesAsync();
         public Task<List<Style>> GetAllStylesActiveAsync();
-        public Task<Style> GetStylesAsync(int id);
+        public Task<Style> GetStyleAcync(int id);
         public Task<Style> AddStyleAsync(Style style);
         public Task UpdateStyleAsync(Style style);
         public Task DeleteStyleAsync(int id);
+        public Task<Style> GetStyleByNameAcync(string name);
+        public Task<List<Style>> GetSearchNameAsync(string name);
     }
 }

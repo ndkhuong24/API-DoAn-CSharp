@@ -39,12 +39,41 @@ namespace API.Controllers
                 return BadRequest();
             }
         }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetStyle(int id)
+        [HttpGet("id/{id}")]
+        public async Task<IActionResult> GetStyleAcync(int id)
         {
-            var style = await _styleRepository.GetStylesAsync(id);
-            return Ok(style);
+            try
+            {
+                return Ok(await _styleRepository.GetStyleAcync(id));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet("name/{name}")]
+        public async Task<IActionResult> GetStyleByNameAcync(string name)
+        {
+            try
+            {
+                return Ok(await _styleRepository.GetStyleByNameAcync(name));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet("searchName/{name}")]
+        public async Task<IActionResult> GetSearchNameAsync(string name)
+        {
+            try
+            {
+                return Ok(await _styleRepository.GetSearchNameAsync(name));
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
         [HttpPost]
         public async Task<IActionResult> PostStyle(Style style)
