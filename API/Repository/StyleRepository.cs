@@ -11,13 +11,6 @@ namespace API.Repository
         {
             _dbcontext = styleDbcontext;
         }
-        //public async Task<Style> AddStyleAsync(Style style)
-        //{
-
-        //    var styles = (await _dbcontext.Style!.FromSqlRaw("EXECUTE PostStyle @Id=0, @Name={0},@Status={1}", style.id, style.name, style.status).ToListAsync()).FirstOrDefault();
-        //    var a = styles;
-        //    return a;
-        //}
         public async Task<Style> AddStyleAsync(Style style)
         {
             try
@@ -58,9 +51,16 @@ namespace API.Repository
             return styles;
 
         }
-        public async Task<Style> GetStylesAsync(int id)
+
+        public async Task<Style> GetStyleAcync(int id)
         {
             var style = (await _dbcontext.Style!.FromSqlRaw("EXECUTE Style_Get {0}", id).ToListAsync()).FirstOrDefault();
+            return style;
+        }
+
+        public async Task<Style> GetStyleByNameAcync(string name)
+        {
+            var style = (await _dbcontext.Style!.FromSqlRaw("EXECUTE GetStyleByName {0}", name).ToListAsync()).FirstOrDefault();
             return style;
         }
         public async Task UpdateStyleAsync(Style style)

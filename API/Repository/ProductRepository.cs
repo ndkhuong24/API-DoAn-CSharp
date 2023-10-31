@@ -68,18 +68,17 @@ namespace API.Repository
                 throw ex;
             }
         }
-
-        public async Task UpdateProductAsync(int id, Product product)
+        public async Task UpdateProductAsync(Product product)
         {
             try
             {
-                var ids = new SqlParameter("@Id", id);
+                var id = new SqlParameter("@Id", product.id);
                 var code = new SqlParameter("@Code", product.code);
                 var name = new SqlParameter("@Name", product.name);
                 var style_id = new SqlParameter("@Style_id", product.style_id);
                 var description = new SqlParameter("@Description", product.description);
                 var status = new SqlParameter("@Status", product.status);
-                await _dbcontext.Database.ExecuteSqlRawAsync("EXEC UpdateProduct @Id,@Code,@Name,@Style_id,@Description,@Status", ids, code, name, style_id, description, status);
+                await _dbcontext.Database.ExecuteSqlRawAsync("EXEC UpdateProduct @Id,@Code,@Name,@Style_id,@Description,@Status", id, code, name, style_id, description, status);
             }
             catch (Exception ex)
             {

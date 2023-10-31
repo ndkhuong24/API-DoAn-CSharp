@@ -64,12 +64,12 @@ namespace API.Controllers
                 return BadRequest();
             }
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProductAsync(int id, Product product)
+        [HttpPut]
+        public async Task<IActionResult> UpdateProductAsync(Product product)
         {
             try
             {
-                await _productRepository.UpdateProductAsync(id, product);
+                await _productRepository.UpdateProductAsync(product);
                 return Ok();
             }
             catch
