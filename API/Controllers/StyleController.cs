@@ -62,7 +62,6 @@ namespace API.Controllers
             {
                 return BadRequest();
             }
-<<<<<<< HEAD
         }
         [HttpGet("searchName/{name}")]
         public async Task<IActionResult> GetSearchNameAsync(string name)
@@ -75,8 +74,6 @@ namespace API.Controllers
             {
                 return BadRequest();
             }
-=======
->>>>>>> 1bb5197b9b71aa71b8c158a02259a0b21de7564e
         }
         [HttpPost]
         public async Task<IActionResult> PostStyle(Style style)

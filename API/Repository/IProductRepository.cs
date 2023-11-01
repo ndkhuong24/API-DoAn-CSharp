@@ -9,5 +9,6 @@ namespace API.Repository
         public Task<Product> AddProductAsync(Product product);
         public Task UpdateProductAsync(Product product);
         public Task DeleteProductAsync(int id);
+        public Task<List<Product>> GetSearchNameAsync(string name);
     }
 }

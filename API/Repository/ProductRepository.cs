@@ -68,6 +68,13 @@ namespace API.Repository
                 throw ex;
             }
         }
+
+        public async Task<List<Product>> GetSearchNameAsync(string name)
+        {
+            var products = await _dbcontext.Product!.FromSqlRaw("EXEC SearchProductByName {0}", name).ToListAsync();
+            return products;
+        }
+
         public async Task UpdateProductAsync(Product product)
         {
             try

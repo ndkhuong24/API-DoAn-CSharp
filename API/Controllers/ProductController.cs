@@ -38,6 +38,18 @@ namespace API.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet("searchName/{name}")]
+        public async Task<IActionResult> GetSearchNameAsync(string name)
+        {
+            try
+            {
+                return Ok(await _productRepository.GetSearchNameAsync(name));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
         [HttpPost]
         public async Task<IActionResult> AddProductAsync(Product product)
         {
