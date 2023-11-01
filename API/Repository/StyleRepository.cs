@@ -52,12 +52,15 @@ namespace API.Repository
 
         }
 
+<<<<<<< HEAD
         public async Task<List<Style>> GetSearchNameAsync(string name)
         {
             var styles = await _dbcontext.Style!.FromSqlRaw("EXEC SearchStylesByName {0}",name).ToListAsync();
             return styles;
         }
 
+=======
+>>>>>>> 1bb5197b9b71aa71b8c158a02259a0b21de7564e
         public async Task<Style> GetStyleAcync(int id)
         {
             var style = (await _dbcontext.Style!.FromSqlRaw("EXECUTE Style_Get {0}", id).ToListAsync()).FirstOrDefault();
