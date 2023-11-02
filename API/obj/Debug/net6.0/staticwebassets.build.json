@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "Hash": "6VA2Q6/FsPaIeD0Tb0jVFFQavW6nK5qJ5pO4z1fpleU=",
+=======
+  "Hash": "eW4irRP/kNu53wWgZ03HZyvsqTFRGSOB7rr5NIe2gDs=",
+>>>>>>> 48fb7607e3e06c0cef53b97e530661b4526c13b2
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -17,12 +21,20 @@
   ],
   "Assets": [
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\images\\image (1).jpg",
+=======
+      "Identity": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\images\\image (3).jpg",
+>>>>>>> 48fb7607e3e06c0cef53b97e530661b4526c13b2
       "SourceId": "API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\",
       "BasePath": "_content/API",
+<<<<<<< HEAD
       "RelativePath": "images/image (1).jpg",
+=======
+      "RelativePath": "images/image (3).jpg",
+>>>>>>> 48fb7607e3e06c0cef53b97e530661b4526c13b2
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,6 +43,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
+<<<<<<< HEAD
       "OriginalItemSpec": "wwwroot\\images\\image (1).jpg"
     },
     {
@@ -65,6 +78,8 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
+=======
+>>>>>>> 48fb7607e3e06c0cef53b97e530661b4526c13b2
       "OriginalItemSpec": "wwwroot\\images\\image (3).jpg"
     },
     {
