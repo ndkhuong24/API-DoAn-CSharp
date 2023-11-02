@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3Yz9PDMs6cbR1GeqBzAilGZsdJv6XGuqs5+HU3onZKg=",
+  "Hash": "vIgIG/mVzv3HJsCRsV7vN/4Zb1czITeDN4/u+TQyyZM=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -15,5 +15,23 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\images\\Hello.cs",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\",
+      "BasePath": "_content/API",
+      "RelativePath": "images/Hello.cs",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Hello.cs"
+    }
+  ]
 }
