@@ -80,12 +80,12 @@ namespace API.Repository
             try
             {
                 var id = new SqlParameter("@Id", product.id);
-                var code = new SqlParameter("@Code", product.code);
-                var name = new SqlParameter("@Name", product.name);
-                var style_id = new SqlParameter("@Style_id", product.style_id);
-                var description = new SqlParameter("@Description", product.description);
-                var status = new SqlParameter("@Status", product.status);
-                await _dbcontext.Database.ExecuteSqlRawAsync("EXEC UpdateProduct @Id,@Code,@Name,@Style_id,@Description,@Status", id, code, name, style_id, description, status);
+                var code = new SqlParameter("@NewCode", product.code);
+                var name = new SqlParameter("@NewName", product.name);
+                var styleId = new SqlParameter("@NewStyleId", product.style_id);
+                var description = new SqlParameter("@NewDescription", product.description);
+                var status = new SqlParameter("@NewStatus", product.status);
+                await _dbcontext.Database.ExecuteSqlRawAsync("EXEC UpdateProduct @Id,@NewCode,@NewName,@NewStyleId,@NewDescription,@NewStatus", id, code, name, styleId, description, status);
             }
             catch (Exception ex)
             {
