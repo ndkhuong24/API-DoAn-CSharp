@@ -15,7 +15,6 @@ namespace API.Controllers
         {
             _configuration = configuration;
         }
-
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAllProductDetail()
         {
@@ -54,7 +53,46 @@ namespace API.Controllers
                 return BadRequest("Error: " + ex.Message);
             }
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLServer-Connection")))
+                {
+                    await connection.OpenAsync();
+                    var command = new SqlCommand("GetProductDetail", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", id);
 
+                    var reader = await command.ExecuteReaderAsync();
+
+                    var results = new List<ProductDetailTable>();
+
+                    while (await reader.ReadAsync())
+                    {
+                        var productDetail = new ProductDetailTable
+                        {
+                            Id = reader.GetInt32("ProductID"),
+                            Path = reader.GetString("Path"),
+                            ProductName = reader.GetString("ProductName"),
+                            StyleName = reader.GetString("StyleName"),
+                            Quantity = reader.GetInt32("Quantity"),
+                            Price = reader.GetInt32("Price"),
+                            Status = reader.GetInt32("Status")
+                        };
+
+                        results.Add(productDetail);
+                    }
+
+                    return Ok(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error: " + ex.Message);
+            }
+        }
 
         [HttpPost]
         [Route("upload-anh-chinh")]
