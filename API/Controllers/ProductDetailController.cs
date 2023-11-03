@@ -15,46 +15,45 @@ namespace API.Controllers
         {
             _configuration = configuration;
         }
-        [HttpGet("searchName/{name}")]
-        public async Task<IActionResult> GetSearchNameAsync(string name)
+
+        [HttpGet("getById/{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLServer-Connection")))
                 {
                     await connection.OpenAsync();
-                    var command = new SqlCommand("SearchProductDetailByName", connection);
+                    var command = new SqlCommand("SearchProductDetailById", connection);
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@searchPattern", name);
+
+                    command.Parameters.AddWithValue("@Id", id);
 
                     var reader = await command.ExecuteReaderAsync();
 
-                    var results = new List<ProductDetailTable>();
-
-                    while (await reader.ReadAsync())
+                    if (await reader.ReadAsync())
                     {
-                        var productDetail = new ProductDetailTable
+                        var productDetail = new ProductCart
                         {
-                            Id = reader.GetInt32("ProductID"),
-                            Path = reader.GetString("Path"),
-                            ProductName = reader.GetString("ProductName"),
-                            StyleName = reader.GetString("StyleName"),
-                            Quantity = reader.GetInt32("Quantity"),
-                            Price = reader.GetInt32("Price"),
-                            Status = reader.GetInt32("Status")
+                            Id = (int)reader["Id"],
+                            Path = reader["Path"].ToString(),
+                            Price = (int)reader["Price"],
                         };
 
-                        results.Add(productDetail);
+                        return Ok(productDetail);
                     }
-
-                    return Ok(results);
+                    else
+                    {
+                        return NotFound("Không tìm thấy sản phẩm với ID " + id);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                return BadRequest("Error: " + ex.Message);
+                return BadRequest("Lỗi: " + ex.Message);
             }
         }
+
 
 
         [HttpGet("getAll")]
@@ -163,6 +162,7 @@ namespace API.Controllers
                 return BadRequest("Error: " + ex.Message);
             }
         }
+
         [HttpPost]
         [Route("insert")]
         public async Task<IActionResult> InsertProductDetail(ProductDetailViewModel productDetailViewModel)
