@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ADAcTtmA9/hRfH6rYqEYbvMgBCTgxKtc46G94RGrHH4e94Fwmd8VbAhy/ceQ3cnaeSII7JmtUOrrnA9zmZmCPA==",
+  "dgSpecHash": "XJjSW6WR7VwVuhf1YD0L7Y0z+xZhrMgf9KoVbtANuov89FKQF7n3z2DW3zwDSt75P2mxGlmsuaXJ3GxpJKyuvg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kn134\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\kn134\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

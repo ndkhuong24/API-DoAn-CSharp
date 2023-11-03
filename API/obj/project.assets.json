@@ -3415,11 +3415,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\API.csproj",
+      "projectPath": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\API.csproj",
       "packagesPath": "C:\\Users\\kn134\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\obj\\",
+      "outputPath": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kn134\\AppData\\Roaming\\NuGet\\NuGet.Config"

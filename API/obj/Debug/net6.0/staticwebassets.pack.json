@@ -1,27 +1,35 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\images\\image (1).jpg",
+      "Id": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\wwwroot\\images\\22_11_2021 9_19_54 CH.jpg",
+      "PackagePath": "staticwebassets\\images\\22_11_2021 9_19_54 CH.jpg"
+    },
+    {
+      "Id": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\wwwroot\\images\\6f12431af1fc38a261ed.jpg.jpg",
+      "PackagePath": "staticwebassets\\images\\6f12431af1fc38a261ed.jpg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\wwwroot\\images\\image (1).jpg",
       "PackagePath": "staticwebassets\\images\\image (1).jpg"
     },
     {
-      "Id": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\images\\image (2).jpg",
+      "Id": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\wwwroot\\images\\image (2).jpg",
       "PackagePath": "staticwebassets\\images\\image (2).jpg"
     },
     {
-      "Id": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\images\\image (3).jpg",
+      "Id": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\wwwroot\\images\\image (3).jpg",
       "PackagePath": "staticwebassets\\images\\image (3).jpg"
     },
     {
-      "Id": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\images\\image (4).jpg",
+      "Id": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\wwwroot\\images\\image (4).jpg",
       "PackagePath": "staticwebassets\\images\\image (4).jpg"
     },
     {
-      "Id": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\images\\image (5).jpg",
+      "Id": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\wwwroot\\images\\image (5).jpg",
       "PackagePath": "staticwebassets\\images\\image (5).jpg"
     },
     {
-      "Id": "C:\\Users\\kn134\\OneDrive\\Máy tính\\API-DoAn-CSharp\\API\\wwwroot\\images\\image (6).jpg",
+      "Id": "C:\\Users\\kn134\\Máy tính\\API-DoAn-Csharp\\API\\wwwroot\\images\\image (6).jpg",
       "PackagePath": "staticwebassets\\images\\image (6).jpg"
     },
     {
