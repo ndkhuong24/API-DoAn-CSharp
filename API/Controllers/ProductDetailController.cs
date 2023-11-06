@@ -26,7 +26,6 @@ namespace API.Controllers
                     await connection.OpenAsync();
                     var command = new SqlCommand("SearchProductDetailById", connection);
                     command.CommandType = CommandType.StoredProcedure;
-
                     command.Parameters.AddWithValue("@Id", id);
 
                     var reader = await command.ExecuteReaderAsync();
@@ -36,6 +35,7 @@ namespace API.Controllers
                         var productDetail = new ProductCart
                         {
                             Id = (int)reader["Id"],
+                            Name= reader["Name"].ToString(),
                             Path = reader["Path"].ToString(),
                             Price = (int)reader["Price"],
                         };
@@ -53,9 +53,6 @@ namespace API.Controllers
                 return BadRequest("Lỗi: " + ex.Message);
             }
         }
-
-
-
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAllProductDetail()
         {
@@ -162,7 +159,6 @@ namespace API.Controllers
                 return BadRequest("Error: " + ex.Message);
             }
         }
-
         [HttpPost]
         [Route("insert")]
         public async Task<IActionResult> InsertProductDetail(ProductDetailViewModel productDetailViewModel)
@@ -212,5 +208,119 @@ namespace API.Controllers
                 return BadRequest("Error: " + ex.Message);
             }
         }
+
+
+        [HttpGet("getPDByID/{id}")]
+        public async Task<IActionResult> GetPDById(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLServer-Connection")))
+                {
+                    await connection.OpenAsync();
+                    var command = new SqlCommand("GetProductDetailById", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    var reader = await command.ExecuteReaderAsync();
+
+                    if (await reader.ReadAsync())
+                    {
+                        var getPDById = new GetPDById
+                        {
+                            Id = (int)reader["Id"],
+                            CategoryName = reader["CategoryName"].ToString(),
+                            BrandName = reader["BrandName"].ToString(),
+                            ProductName = reader["ProductName"].ToString(),
+                            SizeName = reader["SizeName"].ToString(),
+                            ColorName = reader["ColorName"].ToString(),
+                            SoleName = reader["SoleName"].ToString(),
+                        };
+
+                        return Ok(getPDById);
+                    }
+                    else
+                    {
+                        return NotFound("Không tìm thấy sản phẩm với ID " + id);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Lỗi: " + ex.Message);
+            }
+        }
+
+        [HttpGet("getImageChinhById/{id}")]
+        public async Task<IActionResult> GetImageChinhById(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLServer-Connection")))
+                {
+                    await connection.OpenAsync();
+                    var command = new SqlCommand("GetImageChinhProductDetail", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    var reader = await command.ExecuteReaderAsync();
+
+                    if (await reader.ReadAsync())
+                    {
+                        var imageChinh = new ImageChinh
+                        {
+                            Id = (int)reader["Id"],
+                            Path = reader["Path"].ToString()
+                        };
+
+                        return Ok(imageChinh);
+                    }
+                    else
+                    {
+                        return NotFound("Không tìm thấy sản phẩm với ID " + id);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Lỗi: " + ex.Message);
+            }
+        }
+
+        [HttpGet("getImagePhuById/{id}")]
+        public async Task<IActionResult> GetImagePhuProductDetail(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLServer-Connection")))
+                {
+                    await connection.OpenAsync();
+                    var command = new SqlCommand("GetImagePhuProductDetail", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    var reader = await command.ExecuteReaderAsync();
+
+                    var results = new List<ImagePhu>();
+
+                    while (await reader.ReadAsync())
+                    {
+                        var imagePhu = new ImagePhu
+                        {
+                            Id = reader.GetInt32("Id"),
+                            Path = reader.GetString("Path")
+                        };
+
+                        results.Add(imagePhu);
+                    }
+                    return Ok(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error: " + ex.Message);
+            }
+        }
+
     }
 }

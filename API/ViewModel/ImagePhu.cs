@@ -1,10 +1,8 @@
 ﻿namespace API.ViewModel
 {
-    public class ProductCart
+    public class ImagePhu
     {
         public int Id { get; set; }
-        public string Name { get; set; }
         public string Path { get; set; }
-        public int Price { get; set; }
     }
 }
