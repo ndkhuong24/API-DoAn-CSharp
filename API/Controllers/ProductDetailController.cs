@@ -35,9 +35,11 @@ namespace API.Controllers
                         var productDetail = new ProductCart
                         {
                             Id = (int)reader["Id"],
-                            Name= reader["Name"].ToString(),
+                            Name = reader["Name"].ToString(),
                             Path = reader["Path"].ToString(),
                             Price = (int)reader["Price"],
+                            Quantity = (int)reader["Quantity"],
+                            Status = (int)reader["Status"]
                         };
 
                         return Ok(productDetail);
@@ -315,6 +317,39 @@ namespace API.Controllers
                     }
                     return Ok(results);
                 }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error: " + ex.Message);
+            }
+        }
+
+
+
+
+
+        [HttpPut]
+        [Route("update")]
+        public async Task<IActionResult> UpdateProductDetail(int id, int quantity, int price, int status)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLServer-Connection")))
+                {
+                    connection.Open();
+                    var command = new SqlCommand("UpdateProductDetail", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@NewId", id);
+                    command.Parameters.AddWithValue("@NewQuantity", quantity);
+                    command.Parameters.AddWithValue("@NewPrice", price);
+                    command.Parameters.AddWithValue("@NewStatus", status);
+
+                    await command.ExecuteNonQueryAsync();
+
+                }
+
+                return Ok("Success");
             }
             catch (Exception ex)
             {
