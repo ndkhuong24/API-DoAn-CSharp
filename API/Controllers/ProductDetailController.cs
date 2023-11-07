@@ -324,10 +324,6 @@ namespace API.Controllers
             }
         }
 
-
-
-
-
         [HttpPut]
         [Route("update")]
         public async Task<IActionResult> UpdateProductDetail(int id, int quantity, int price, int status)
