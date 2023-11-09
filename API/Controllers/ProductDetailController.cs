@@ -210,8 +210,6 @@ namespace API.Controllers
                 return BadRequest("Error: " + ex.Message);
             }
         }
-
-
         [HttpGet("getPDByID/{id}")]
         public async Task<IActionResult> GetPDById(int id)
         {
@@ -350,6 +348,53 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 return BadRequest("Error: " + ex.Message);
+            }
+        }
+
+        [HttpGet("GetProductDetailAndCart/{id}")]
+        public async Task<IActionResult> GetProductDetailAndCart(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLServer-Connection")))
+                {
+                    await connection.OpenAsync();
+                    var command = new SqlCommand("GetProductDetailAndCart", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    var reader = await command.ExecuteReaderAsync();
+
+                    if (await reader.ReadAsync())
+                    {
+                        var getProductDetailAndCart = new GetProductDetailAndCart
+                        {
+                            ProductDetailID = (int)reader["ProductDetailID"],
+                            ProductCode = reader["ProductCode"].ToString(),
+                            ProductName = reader["ProductName"].ToString(),
+                            ProductDescription = reader["ProductDescription"].ToString(),
+                            StyleName = reader["StyleName"].ToString(),
+                            CategoryName = reader["CategoryName"].ToString(),
+                            BrandName = reader["BrandName"].ToString(),
+                            SizeName = reader["SizeName"].ToString(),
+                            ColorName = reader["ColorName"].ToString(),
+                            SoleName = reader["SoleName"].ToString(),
+                            MaterialName = reader["MaterialName"].ToString(),
+                            Quantity = (int)reader["Quantity"],
+                            Price = (int)reader["Price"]
+                        };
+
+                        return Ok(getProductDetailAndCart);
+                    }
+                    else
+                    {
+                        return NotFound("Không tìm thấy sản phẩm với ID " + id);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Lỗi: " + ex.Message);
             }
         }
 
