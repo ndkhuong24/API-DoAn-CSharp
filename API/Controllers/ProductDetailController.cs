@@ -381,7 +381,8 @@ namespace API.Controllers
                             SoleName = reader["SoleName"].ToString(),
                             MaterialName = reader["MaterialName"].ToString(),
                             Quantity = (int)reader["Quantity"],
-                            Price = (int)reader["Price"]
+                            Price = (int)reader["Price"],
+                            Status = (int)reader["Status"]
                         };
 
                         return Ok(getProductDetailAndCart);
