@@ -2,6 +2,7 @@
 {
     public class UserAddress
     {
+        public int AddressID { get; set; }
         public string ProvinceID { get; set; }
         public string ProvinceName { get; set; }
         public string DistrictID { get; set; }

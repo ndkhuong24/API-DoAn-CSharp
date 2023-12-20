@@ -36,6 +36,7 @@ namespace API.Controllers
                     {
                         var userAddress = new UserAddress
                         {
+                            AddressID = (int)reader["AddressID"],
                             ProvinceID = reader["ProvinceID"].ToString(),
                             ProvinceName = reader["ProvinceName"].ToString(),
                             DistrictID = reader["DistrictID"].ToString(),
