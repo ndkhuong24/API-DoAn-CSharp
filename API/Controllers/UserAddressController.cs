@@ -17,7 +17,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{userID}")]
-        public async Task<IActionResult> GetUserAddressByUserID(string userID)
+        public async Task<IActionResult> GetUserAddressByUserID(int userID)
         {
             try
             {
@@ -63,5 +63,33 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("{userID}")]
+        public async Task<IActionResult> UpdateAddressDefault(int addressID, int userID)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("SQLServer-Connection")))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand("UpdateAddressDefault", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@AddressID", addressID);
+                        command.Parameters.AddWithValue("@UserID", userID);
+
+                        await command.ExecuteNonQueryAsync();
+
+                        return Ok("Address updated successfully");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Failed to update address. Please try again.");
+            }
+        }
+
     }
 }
