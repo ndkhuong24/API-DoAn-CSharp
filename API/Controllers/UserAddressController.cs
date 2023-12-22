@@ -91,5 +91,39 @@ namespace API.Controllers
             }
         }
 
+        [HttpPost("add/{userID}")]
+        public async Task<IActionResult> InsertAddress(UserAddress userAddress, int userID)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("SQLServer-Connection")))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand("InsertAddress", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@ProvinceID", userAddress.ProvinceID);
+                        command.Parameters.AddWithValue("@ProvinceName", userAddress.ProvinceName);
+                        command.Parameters.AddWithValue("@DistrictID", userAddress.DistrictID);
+                        command.Parameters.AddWithValue("@DistrictName", userAddress.DistrictName);
+                        command.Parameters.AddWithValue("@CommuneID", userAddress.CommuneID);
+                        command.Parameters.AddWithValue("@CommuneName", userAddress.CommuneName);
+                        command.Parameters.AddWithValue("@DetailAddress", userAddress.DetailAddress);
+                        command.Parameters.AddWithValue("@Status", userAddress.Status);
+                        command.Parameters.AddWithValue("@UserID", userID);
+
+                        await command.ExecuteNonQueryAsync();
+
+                        return Ok("Insert address successfully");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Failed to insert address. Please try again.");
+            }
+        }
+
     }
 }
