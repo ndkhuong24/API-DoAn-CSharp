@@ -50,7 +50,7 @@ namespace API.Controllers
         {
             try
             {
-                var style = await _styleRepository.GetStyleAsync(id);
+                var style = await _styleRepository.GetStyleAcync(id);
                 return Ok(style);
             }
             catch (Exception ex)
@@ -65,7 +65,7 @@ namespace API.Controllers
         {
             try
             {
-                var style = await _styleRepository.GetStyleByNameAsync(name);
+                var style = await _styleRepository.GetStyleByNameAcync(name);
                 return Ok(style);
             }
             catch (Exception ex)

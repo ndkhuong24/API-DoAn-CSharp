@@ -46,7 +46,7 @@ namespace API.Controllers
                         orderDetailTable.Columns.Add("quantity", typeof(int));
                         orderDetailTable.Columns.Add("price", typeof(int));
 
-                        foreach (var orderDetail in orderDTO.OrderDetail)
+                        foreach (var orderDetail in orderDTO.orderDetail)
                         {
                             orderDetailTable.Rows.Add(orderDetail.ProductDetailId, orderDetail.Quantity, orderDetail.Price);
                         }

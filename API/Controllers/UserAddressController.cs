@@ -84,16 +84,29 @@ namespace API.Controllers
                     {
                         var userAddress = new UserAddress
                         {
-                            AddressID = (int)reader["AddressID"],
-                            ProvinceID = reader["ProvinceID"].ToString(),
-                            ProvinceName = reader["ProvinceName"].ToString(),
-                            DistrictID = reader["DistrictID"].ToString(),
-                            DistrictName = reader["DistrictName"].ToString(),
-                            CommuneID = reader["CommuneID"].ToString(),
-                            CommuneName = reader["CommuneName"].ToString(),
-                            DetailAddress = reader["detail_address"].ToString(),
+                            AddressID = reader["AddressID"] as int? ?? 0,
+                            ProvinceID = reader["ProvinceID"]?.ToString() ?? string.Empty,
+                            ProvinceName = reader["ProvinceName"]?.ToString() ?? string.Empty,
+                            DistrictID = reader["DistrictID"]?.ToString() ?? string.Empty,
+                            DistrictName = reader["DistrictName"]?.ToString() ?? string.Empty,
+                            CommuneID = reader["CommuneID"]?.ToString() ?? string.Empty,
+                            CommuneName = reader["CommuneName"]?.ToString() ?? string.Empty,
+                            DetailAddress = reader["detail_address"]?.ToString() ?? string.Empty,
                             Status = reader["status"] == DBNull.Value ? 0 : (int)reader["status"]
                         };
+
+                        //var userAddress = new UserAddress
+                        //{
+                        //    AddressID = (int)reader["AddressID"],
+                        //    ProvinceID = reader["ProvinceID"].ToString(),
+                        //    ProvinceName = reader["ProvinceName"].ToString(),
+                        //    DistrictID = reader["DistrictID"].ToString(),
+                        //    DistrictName = reader["DistrictName"].ToString(),
+                        //    CommuneID = reader["CommuneID"].ToString(),
+                        //    CommuneName = reader["CommuneName"].ToString(),
+                        //    DetailAddress = reader["detail_address"].ToString(),
+                        //    Status = reader["status"] == DBNull.Value ? 0 : (int)reader["status"]
+                        //};
 
                         results.Add(userAddress);
                     }
@@ -225,8 +238,11 @@ namespace API.Controllers
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@ProvinceID", userAddress.ProvinceID);
+                        command.Parameters.AddWithValue("@ProvinceName", userAddress.ProvinceName);
                         command.Parameters.AddWithValue("@DistrictID", userAddress.DistrictID);
+                        command.Parameters.AddWithValue("@DistrictName", userAddress.DistrictName);
                         command.Parameters.AddWithValue("@CommuneID", userAddress.CommuneID);
+                        command.Parameters.AddWithValue("@CommuneName", userAddress.CommuneName);
                         command.Parameters.AddWithValue("@DetailAddress", userAddress.DetailAddress);
                         command.Parameters.AddWithValue("@Status", userAddress.Status);
                         command.Parameters.AddWithValue("@UserID", userID);
@@ -248,8 +264,8 @@ namespace API.Controllers
         }
 
 
-        [HttpPost("delete/{userID}")]
-        public async Task<IActionResult> DeleteAddress(int addressId, int userID)
+        [HttpDelete("delete/{userID}/{addressId}")]
+        public async Task<IActionResult> DeleteAddress(int userID, int addressId)
         {
             try
             {
@@ -278,6 +294,7 @@ namespace API.Controllers
                 return BadRequest($"Exception: {ex.Message}");
             }
         }
+
 
 
 
