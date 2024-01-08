@@ -36,14 +36,10 @@ namespace API.Controllers
                         {
                             Id = (int)reader["id"],
                             UserID = (int)reader["user_id"],
-                            //UserID = reader["user_id"].ToString(),
                             DetailAddress = reader["detail_address"].ToString(),
                             ProvinceID = reader["province_id"].ToString(),
                             DistrictID = reader["district_id"].ToString(),
                             CommuneID = reader["commune_id"].ToString(),
-                            //ProvinceID = (int)reader["province_id"],
-                            //DistrictID = int.Parse(reader["district_id"].ToString()),
-                            //CommuneID = (int)reader["commune_id"],
                             Status = (int)reader["status"],
                         };
 
@@ -61,6 +57,36 @@ namespace API.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateAddress([FromBody] UserAddress userAddress)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLServer-Connection")))
+                {
+                    await connection.OpenAsync();
+                    var command = new SqlCommand("UpdateDetailAddress", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@AddressID", userAddress.AddressID);
+                    command.Parameters.AddWithValue("@NewProvinceID", userAddress.ProvinceID);
+                    command.Parameters.AddWithValue("@NewProvinceName", userAddress.ProvinceName);
+                    command.Parameters.AddWithValue("@NewDistrictID", userAddress.DistrictID);
+                    command.Parameters.AddWithValue("@NewDistrictName", userAddress.DistrictName);
+                    command.Parameters.AddWithValue("@NewCommuneID", userAddress.CommuneID);
+                    command.Parameters.AddWithValue("@NewCommuneName", userAddress.CommuneName);
+                    command.Parameters.AddWithValue("@NewDetailAddress", userAddress.DetailAddress);
+
+                    await command.ExecuteNonQueryAsync();
+
+                    return Ok("Đã cập nhật địa chỉ thành công.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Lỗi: " + ex.Message);
+            }
+        }
 
     }
 }

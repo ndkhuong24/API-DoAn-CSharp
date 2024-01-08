@@ -10,6 +10,6 @@
         public string CommuneID { get; set; }
         public string CommuneName { get; set; }
         public string DetailAddress { get; set; }
-        public int Status { get; set; }
+        public int? Status { get; set; }
     }
 }
